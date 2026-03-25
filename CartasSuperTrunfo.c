@@ -5,13 +5,17 @@ int main(){
 
     // Carta 01
     char estado_01, codigo_01[50], cidade_01[50];
-    int populacao_01, pontos_turisticos_01;
+    unsigned long populacao_01;
+    int pontos_turisticos_01;
     float area_01, pib_01, densidade_populacional_01, pib_per_capita_01;
+    float super_poder_01;
 
     // Carta 02
     char estado_02, codigo_02[50], cidade_02[50];
-    int populacao_02, pontos_turisticos_02;
+    unsigned long populacao_02;
+    int pontos_turisticos_02;
     float area_02, pib_02, densidade_populacional_02, pib_per_capita_02;
+    float super_poder_02;
 
 
     // Tela inicial
@@ -37,7 +41,7 @@ int main(){
     cidade_01[strcspn(cidade_01, "\n")] = 0; // remove o ENTER capturado pelo fgets
 
     printf("Digite a populacao da cidade: ");
-    scanf("%d", &populacao_01);
+    scanf("%lu", &populacao_01);
 
     printf("Digite a area da cidade em km2: ");
     scanf("%f", &area_01);
@@ -48,6 +52,13 @@ int main(){
     printf("Digite o numero de pontos turisticos da cidade: ");
     scanf("%d", &pontos_turisticos_01);
 
+    // Calculo do super poder - carta 01
+    super_poder_01 = (float)populacao_01 +
+                    area_01 +
+                    pib_01 +
+                    pontos_turisticos_01 + 
+                    pib_per_capita_01 + 
+                    (1 / densidade_populacional_01);
 
     // Mensagem na tela informando a conclusão do cadastro da carta 1
     printf("-------------------------\n");
@@ -73,7 +84,7 @@ int main(){
     cidade_02[strcspn(cidade_02, "\n")] = 0;
 
     printf("Digite a populacao da cidade: ");
-    scanf("%d", &populacao_02);
+    scanf("%lu", &populacao_02);
 
     printf("Digite a area da cidade em km2: ");
     scanf("%f", &area_02);
@@ -83,6 +94,14 @@ int main(){
 
     printf("Digite o numero de pontos turisticos da cidade: ");
     scanf("%d", &pontos_turisticos_02);
+
+    // Calculo do super poder - carta 01
+    super_poder_02 = (float)populacao_02 +
+                    area_02 +
+                    pib_02 +
+                    pontos_turisticos_02 + 
+                    pib_per_capita_02 + 
+                    (1 / densidade_populacional_02);
 
     // Mensagem na tela informando a conclusão do cadastro da carta 2
     printf("-------------------------\n");
@@ -112,7 +131,7 @@ int main(){
     printf("Estado: %c\n", estado_01);
     printf("Codigo: %s\n", codigo_01);
     printf("Nome da Cidade: %s\n", cidade_01);
-    printf("Populacao: %d\n", populacao_01);
+    printf("Populacao: %lu\n", populacao_01);
     printf("Area: %.2f km2\n", area_01);
     printf("PIB: %.2f\n", pib_01);
     printf("Numero de Pontos Turisticos: %d\n", pontos_turisticos_01);
@@ -124,12 +143,26 @@ int main(){
     printf("Estado: %c\n", estado_02);
     printf("Codigo: %s\n", codigo_02);
     printf("Nome da Cidade: %s\n", cidade_02);
-    printf("Populacao: %d\n", populacao_02);
+    printf("Populacao: %lu\n", populacao_02);
     printf("Area: %.2f km2\n", area_02);
     printf("PIB: %.2f\n", pib_02);
     printf("Numero de Pontos Turisticos: %d\n", pontos_turisticos_02);
     printf("Densidade populacional: %.2f\n", densidade_populacional_02);
     printf("PIB per capita: %.2f reais\n", pib_per_capita_02);
+
+    printf("\nComparacao de Cartas:\n\n");
+
+    printf("Populacao: Carta 1 venceu (%d)\n", populacao_01 > populacao_02);
+    printf("Area: Carta 1 venceu (%d)\n", area_01 > area_02);
+    printf("PIB: Carta 1 venceu (%d)\n", pib_01 > pib_02);
+    printf("Pontos Turisticos: Carta 1 venceu (%d)\n", pontos_turisticos_01 > pontos_turisticos_02);
+
+    // Regra invertida
+    printf("Densidade Populacional: Carta 1 venceu (%d)\n", densidade_populacional_01 < densidade_populacional_02);
+
+    printf("PIB per Capita: Carta 1 venceu (%d)\n", pib_per_capita_01 > pib_per_capita_02);
+    printf("Super Poder: Carta 1 venceu (%d)\n", super_poder_01 > super_poder_02);
+
 
     return 0;
 }
